@@ -11,7 +11,7 @@ Prior customer's quotation can be filled automatically, bringing less error.
 Written for customer with continious orders.
 Plan order delivery week, number containers, and provide SC-to-PO list.
 
-4.Weekly Order Report
+4. Weekly Order Report
 Fetch data from Orcale base ERP system.
 Collect info of order amount, expect packing amount, packed amoun.
 Then picture the result and automatically send the result every Monday.
