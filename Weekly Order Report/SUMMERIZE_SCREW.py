@@ -16,8 +16,10 @@ def GET_DATE():
 	year = datetime.now().year
 	last_year = datetime.now()-relativedelta(years=1)
 	last_year = last_year.year
+	next_year = datetime.now()+relativedelta(years=1)
+	next_year = next_year.year
 
-	return year, last_year, today
+	return year, last_year, today, next_year
 
 def ERP_CONNECT(year, last_year):
 
@@ -73,7 +75,7 @@ def ERP_CONNECT(year, last_year):
 	query5 = f"""
 		SELECT DLV_DATE, ORDER_WEIG,SC_NO FROM ssl_cst_orde_d
 		WHERE DLV_DATE >= TO_DATE('{last_year}-12-01', 'YYYY-MM-DD')
-		AND  DLV_DATE < TO_DATE('{year}-12-31', 'YYYY-MM-DD')
+		AND  DLV_DATE < TO_DATE('{next_year}-05-31', 'YYYY-MM-DD')
 		AND  SC_NO NOT IN ('{stock_order}')
 		AND END_CODE != 'D'
 	"""
@@ -192,22 +194,18 @@ def WRITE_FILE():
 
 def CAPTURE_RESULT(excel_path, sheet_name, cell_range, image_path):
 
-	excel = win32.gencache.EnsureDispatch('Excel.Application')
+	excel = win32.Dispatch('Excel.Application')
 	excel.Visible = False  # Keep Excel hidden
 	
-	wb = excel.Workbooks.Open(
-	excel_path,
-	UpdateLinks=False,
-	ReadOnly=True
-	)
+	wb = excel.Workbooks.Open(excel_path, UpdateLinks=False, ReadOnly=True)
 	
 	ws = wb.Sheets(sheet_name)
 	ws.Activate()
 	ws.Range(cell_range).Select()
 
-	time.sleep(1)  # Give Excel time to render the range
+	time.sleep(3)  # Give Excel time to render the range
 
-	ws.Range(cell_range).CopyPicture(Format=win32.constants.xlPicture)
+	ws.Range(cell_range).CopyPicture(Format=-4147)
 
 	# Create a large chart to paste the picture
 	left, top, width, height = 50, 50, 1200, 800
@@ -267,7 +265,7 @@ if __name__ == "__main__":
 
 	log("螺絲接單統計腳本啟動中...")
 
-	year, last_year, today = GET_DATE()
+	year, last_year, today, next_year = GET_DATE()
 	unconfirm, monthly_dfs, month_summerize, expect_ship = ERP_CONNECT(year, last_year)
 	have_shipped = DB_CONNECT(year, last_year)
 	
