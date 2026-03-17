@@ -24,7 +24,7 @@ def GET_DATE():
 def ERP_CONNECT(year, last_year):
 
 	oracle_connection_string = (
-		"oracle+cx_oracle://spselect:select@192.168.1.242:1526/?service_name=sperpdb"
+		""
 	)
 	engine = create_engine(oracle_connection_string)
 
