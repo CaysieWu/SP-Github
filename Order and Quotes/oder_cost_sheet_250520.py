@@ -30,15 +30,15 @@ class ORDER_COST_EXPORT() :
 		First_Item = self.ALL["客戶產品代號(P/N)"].iloc[0]
 		# Define connection details
 		dsn = cx_Oracle.makedsn(
-			host = "192.168.1.242",      # Replace with your host IP or domain
-			port = 1526,                # Replace with your port
-			service_name = "sperpdb"  # Replace with your service name
+			host = "",      # Replace with your host IP or domain
+			port = ,                # Replace with your port
+			service_name = ""  # Replace with your service name
 		)
 
 		# Establish the connection
 		connection = cx_Oracle.connect(
-			user = "spselect",         # Replace with your username
-			password = "select",     # Replace with your password
+			user = "",         # Replace with your username
+			password = "",     # Replace with your password
 			dsn = dsn
 		)
 		query1 = f"SELECT SC_NO,CST_REFE_NO,ORD_CST_NO FROM V_SCH0200Q_ORD WHERE CST_PART_NO = '{First_Item}' ORDER BY SC_NO DESC"
