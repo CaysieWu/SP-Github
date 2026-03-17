@@ -16,15 +16,15 @@ args = parser.parse_args()
 def ERP_Connection(SQL):
     # Define connection details
     dsn = cx_Oracle.makedsn(
-        host="192.168.1.242",      # Replace with your host IP or domain
-        port=1526,                 # Replace with your port
-        service_name="sperpdb"      # Replace with your service name
+        host="",      # Replace with your host IP or domain
+        port=,                 # Replace with your port
+        service_name=""      # Replace with your service name
     )
 
     # Establish the connection
     connection = cx_Oracle.connect(
-        user="spselect",          # Replace with your username
-        password="select",        # Replace with your password
+        user="",          # Replace with your username
+        password="",        # Replace with your password
         dsn=dsn
     )
 
